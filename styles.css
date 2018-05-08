@@ -1,0 +1,46 @@
+html, body {
+  margin: 0px;
+  height: 100%
+}
+
+#configpanel label {
+  display: none;
+}
+
+#menu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#score1 {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+#score2 {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+#tout {
+  display: flex;
+  height: 100%
+}
+
+#tout div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gauche {
+  background-color: #00FF00;
+  width: 50%;
+}
+#droite {
+  background-color: #FF0000;
+  flex-grow: 1;
+}
