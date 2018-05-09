@@ -3,5 +3,8 @@ function drawScores(score1, score2) {
   document.getElementById("score2").innerText = score2;
 }
 
-modobble.init(document.getElementById("gauche"),document.getElementById("droite"),drawScores);
-document.addEventListener("DOMContentLoaded", modobble.draw);
+document.addEventListener("DOMContentLoaded", function() {
+    modobble.init(words,document.getElementById("gauche"),document.getElementById("droite"),drawScores);
+    modobble.draw();
+});
+

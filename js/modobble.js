@@ -1,49 +1,32 @@
 var modobble = (function() {
-  var display1, display2;
+  var players = []
   var words = [ "maison", "chaussure", "bateau", "assiette", "lapin", "chaussette", "cheval", "miaou", "petit", "manger", "rouge", "nuage", "éléphant", "téléphone" ];
-  var wordsPerCard = 4;
-  var card1 = nextCard([]);
-  var card2 = nextCard(card1);
+  var wordsPerCard = 6;
   var scores = [0,0];
   var drawScores;
 
-  function init(d1, d2, f) {
-    display1 = d1;
-    display2 = d2;
+  function init(w, d1, d2, f) {
+    words = w;
+    var card = nextCard([]);
+    players[0] = new Player(d1,card);
+    players[1] = new Player(d2,nextCard(card));
     drawScores = f;
   }
 
-  function nextTurn(previousWinner) {
-    if (previousWinner ==1) {
-      card1 = nextCard(card2);
-      var ponderate = function(word) { return [word,50]; };
-      WordCloud(display1, { list: card1.map(ponderate), click: clickForPlayer(1), shuffle: true } );
-      drawScores(scores[0],scores[1]);
-      console.log(scores);
-      console.log(card1);
-      console.log(card2);
-    }
-
-    if (previousWinner ==2) {
-      card2 = nextCard(card1);
-      var ponderate = function(word) { return [word,50]; };
-      WordCloud(display2, { list: card2.map(ponderate), click: clickForPlayer(2), shuffle: true } );
-      drawScores(scores[0],scores[1]);
-      console.log(scores);
-      console.log(card1);
-      console.log(card2);
-    }
-  }
-
-  function draw() {
-    var ponderate = function(word) { return [word,50]; };
-    WordCloud(display1, { list: card1.map(ponderate), click: clickForPlayer(1), shuffle: true } );
-    WordCloud(display2, { list: card2.map(ponderate), click: clickForPlayer(2), shuffle: true } );
-    drawScores(scores[0],scores[1]);
+  function nextTurn(previousWinner,theOtherPlayer) {
+    previousWinner.card = nextCard(theOtherPlayer.card);
+    previousWinner.draw();
+    drawScores(players[0].score,players[1].score);
   }
 
   function loadWords(list) {
     words = list;
+    card1 = nextCard([]);
+    card2 = nextCard(card1);
+  }
+
+  function theOther(player) {
+    return player == players[0] ? players[1] : players[0];
   }
 
   function nextCard(currentCard) {
@@ -56,25 +39,50 @@ var modobble = (function() {
     return card;
   }
 
-  function clickForPlayer(player) {
+  function clickByPlayer(player) {
     return function(elems) {
-      var word = elems[0]
-      if (_.contains(card1, word) && _.contains(card2, word)) {
-        incrementScore(player);
-        nextTurn(player);
-      }
+      click(player,elems[0])
     }
   }
 
-  function incrementScore(player) {
-    scores[player-1]++;
-    console.log(scores);
+  function click(player,word) {
+    var otherPlayer = theOther(player);
+    if (_.contains(player.card, word) && _.contains(otherPlayer.card, word)) {
+      player.incrementScore();
+      nextTurn(player,otherPlayer);
+    }
   }
+
+  function draw() {
+    players[0].draw();
+    players[1].draw();
+    return players;
+  }
+
+
+  var Player = function(d,c) {
+    this.score = 0;
+    this.card = c;
+    this.display = d;
+  }
+
+  Player.prototype.draw = function() {
+    var ponderate = function(word) { return [word,50]; };
+    var opts = { list: this.card.map(ponderate), click: clickByPlayer(this), shuffle: true, rotateRatio: 1 };
+    WordCloud(this.display, opts);
+    return this;
+  }
+
+  Player.prototype.incrementScore = function() { this.score++; };
 
   return {
     init : init,
     draw : draw,
-    loadWords : loadWords
+    loadWords : loadWords,
+    words : words,
+    players : players
   }
 
 }());
+
+
