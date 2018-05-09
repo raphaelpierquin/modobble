@@ -1,0 +1,55 @@
+#!/bin/bash -e
+
+output=$(pwd)/${1:-manulex.js}
+tmpdir=$(mktemp -d)
+
+cd $tmpdir
+trap "rm -rf -- '$tmpdir'" EXIT
+
+wget http://www.manulex.org/docs/fr/Manulex.xls
+xls2csv -q0 -b 'EOS' Manulex.xls > Manulex.csv
+lastline=$(cat Manulex.csv| grep -n "^EOS" | cut -d : -f 1 | head -1)
+head -n $(expr $lastline - 1) Manulex.csv | tail -n +2 > LEMMES.csv
+
+CP=7; CE1=11; CE2CM2=15
+SIZE=300
+
+
+# nextCE1 = topCE1 - topCP
+cat LEMMES.csv | sort -t "," -k $CP -n -r | head -n $SIZE > topCP
+cat LEMMES.csv | sort -t "," -k $CE1 -n -r | head -n $(expr $SIZE \* 2) > topCE1
+cat topCP topCE1 | sort | uniq -d > dup
+cat topCE1 dup | sort | uniq -u | tail -n $SIZE > nextCE1
+
+# nextCE2CM2 = topCE2CM2 - topCE1 - topCP
+cat LEMMES.csv | sort -t "," -k $CE2CM2 -n -r | head -n $(expr $SIZE \* 4) > topCE2CM2
+cat topCP nextCE1 topCE2CM2 | sort | uniq -d > dup
+cat topCE2CM2 dup | sort | uniq -u | tail -n $(expr $SIZE \* 2) > nextCE2CM2
+
+toJs() {
+  name=$1
+  sortindex=$2
+  file=$3
+  cat $file | \
+    sort -t "," -k $sortindex -n -r | \
+    cut -d , -f 1 | \
+    ( read mot ;
+      echo -n "var $1 = [ \"$mot\"";
+      while read mot ; do
+        echo -n ", \"$mot\"" ;
+      done ;
+    ); \
+    echo -e " ];\n"
+}
+
+cat > $output <<EOF
+/* 
+CC BY-NC-SA 3.0
+http://www.manulex.org/
+*/
+EOF
+
+toJs words_cp $CP topCP >> $output
+toJs words_ce1 $CE1 nextCE1 >> $output
+toJs words_ce2cm2 $CE2CM2 nextCE2CM2 >> $output
+

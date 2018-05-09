@@ -4,7 +4,7 @@ function drawScores(score1, score2) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    modobble.init(words,document.getElementById("gauche"),document.getElementById("droite"),drawScores);
+    modobble.init(words_cp,document.getElementById("gauche"),document.getElementById("droite"),drawScores);
     modobble.draw();
 });
 
