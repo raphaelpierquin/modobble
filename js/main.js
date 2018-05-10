@@ -33,7 +33,10 @@ function updateDeckSelectOptions() {
   while (root.firstChild) { root.removeChild(root.firstChild);}
   wordsDeck.getIndexes().forEach(function(index){
     var option = document.createElement("option");
-    option.appendChild(document.createTextNode(index));
+    var attribute = document.createAttribute("value");
+    attribute.value = index.order;
+    option.setAttributeNode(attribute);
+    option.appendChild(document.createTextNode(index.label));
     root.appendChild(option);
   });
 }

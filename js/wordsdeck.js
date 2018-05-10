@@ -6,6 +6,12 @@ var wordsDeck = (function() {
     ce2cm2: words_ce2cm2
   }
 
+  var levelName ={
+    cp: "CP",
+    ce1: "CE1",
+    ce2cm2: "CE2-CM2"
+  }
+
   var level, deckSize, index;
 
   function init(l, i, s) {
@@ -40,7 +46,12 @@ var wordsDeck = (function() {
   }
 
   function getIndexes() {
-    return _.range(1, wordsPerLevel[level].length + 1, deckSize);
+    var indexes = []
+    _.range(1, wordsPerLevel[level].length + 1, deckSize).forEach(function(i){
+      var label = levelName[level] + " de " + i + " à " + (i + deckSize -1);
+      indexes.push({order:i,label:label});
+    })
+    return indexes;
   }
 
   return {
