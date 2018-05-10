@@ -1,7 +1,7 @@
 var modobble = (function() {
   var players = []
   var words = [ "maison", "chaussure", "bateau", "assiette", "lapin", "chaussette", "cheval", "miaou", "petit", "manger", "rouge", "nuage", "éléphant", "téléphone" ];
-  var wordsPerCard = 6;
+  var wordsPerCard = 5;
   var scores = [0,0];
   var drawScores;
 
@@ -19,11 +19,20 @@ var modobble = (function() {
     drawScores(players[0].score,players[1].score);
   }
 
-  function loadWords(list) {
-    words = list;
+  function reset() {
     players[0].card = nextCard([]);
     players[1].card = nextCard(players[0].card);
     draw();
+  }
+
+  function loadWords(list) {
+    words = list;
+    reset();
+  }
+
+  function setNumberOfWordsPerCard(n) {
+    wordsPerCard = n;
+    reset();
   }
 
   function theOther(player) {
@@ -80,7 +89,8 @@ var modobble = (function() {
     draw : draw,
     loadWords : loadWords,
     words : words,
-    players : players
+    players : players,
+    setNumberOfWordsPerCard: setNumberOfWordsPerCard
   }
 
 }());

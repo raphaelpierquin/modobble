@@ -25,16 +25,25 @@
   <script src="js/manulex.js"></script>
   <script src="js/modobble.js"></script>
   <script src="js/main.js"></script>
-  <div id="configpanel">
-    <label id="level" class="hidden" > Niveau
+  <div id="configpanel" class="hidden">
+    <label id="level"> Niveau
       <select name="level">
         <option value="cp">CP</option>
         <option value="ce1">CE1</option>
         <option value="ce2cm2">CE2-CM2</option>
       </select>
     </label>
+    <label id="wordspercard"> Mots par carte
+      <select name="wordspercard">
+        <option>3</option>
+        <option>4</option>
+        <option selected="selected">5</option>
+        <option>6</option>
+        <option>7</option>
+      </select>
+    </label>
   </div>
-  <div id="menu">config</div>
+  <button id="menu">config</button>
   <div id="score1"></div>
   <div id="score2"></div>
 </body>

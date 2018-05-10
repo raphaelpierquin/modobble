@@ -12,14 +12,19 @@ function levelChangeEventHandler(event) {
     modobble.loadWords(words[event.target.value]);
 }
 
+function wordsPerCardChangeEventHandler(event) {
+  modobble.setNumberOfWordsPerCard(event.target.value);
+}
+
 function toggleConfigPanel() {
-  document.querySelector('#configpanel label').classList.toggle('hidden');
+  document.getElementById('configpanel').classList.toggle('hidden');
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     modobble.init(words_cp,document.getElementById("gauche"),document.getElementById("droite"),drawScores);
     modobble.draw();
     document.querySelector('select[name="level"]').onchange=levelChangeEventHandler;
+    document.querySelector('select[name="wordspercard"]').onchange=wordsPerCardChangeEventHandler;
     document.getElementById('menu').onclick=toggleConfigPanel;
 });
 
