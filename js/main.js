@@ -7,22 +7,15 @@ function drawScores(score1, score2) {
 }
 
 function levelChangeEventHandler(event) {
-  var words_per_level = {
-    cp: words_cp,
-    ce1: words_ce1,
-    ce2cm2: words_ce2cm2
-  }
-  words = words_per_level[event.target.value];
-  modobble.loadWords(_.take(words,sampleSize));
+  wordsDeck.setLevel(event.target.value);
 }
 
 function wordsPerCardChangeEventHandler(event) {
   modobble.setNumberOfWordsPerCard(event.target.value);
 }
 
-function sampleSizeChangeEventHandler(event) {
-  sampleSize = event.target.value;
-  modobble.loadWords(_.take(words,sampleSize));
+function deckSizeChangeEventHandler(event) {
+  wordsDeck.setDeckSize(event.target.value);
 }
 
 function toggleConfigPanel() {
@@ -30,12 +23,13 @@ function toggleConfigPanel() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  words = words_cp;
-  modobble.init(words,document.getElementById("gauche"),document.getElementById("droite"),drawScores);
+  wordsDeck.init('cp',1,25)
+  modobble.init(wordsDeck.getWords(),document.getElementById("gauche"),document.getElementById("droite"),drawScores);
+  wordsDeck.onChange(function(words){ modobble.loadWords(words)});
   modobble.draw();
   document.querySelector('select[name="level"]').onchange=levelChangeEventHandler;
   document.querySelector('select[name="wordspercard"]').onchange=wordsPerCardChangeEventHandler;
-  document.querySelector('select[name="samplesize"]').onchange=sampleSizeChangeEventHandler;
+  document.querySelector('select[name="decksize"]').onchange=deckSizeChangeEventHandler;
   document.getElementById('menu').onclick=toggleConfigPanel;
 });
 
