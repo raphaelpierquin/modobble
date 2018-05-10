@@ -6,23 +6,23 @@ tmpdir=$(mktemp -d)
 cd $tmpdir
 trap "rm -rf -- '$tmpdir'" EXIT
 
-wget http://www.manulex.org/docs/fr/Manulex.xls
+curl -s -O http://www.manulex.org/docs/fr/Manulex.xls
 xls2csv -q0 -b 'EOS' Manulex.xls > Manulex.csv
-lastline=$(cat Manulex.csv| grep -n "^EOS" | cut -d : -f 1 | head -1)
-head -n $(expr $lastline - 1) Manulex.csv | tail -n +2 > LEMMES.csv
+lastline=$(cat Manulex.csv | grep -n "^EOS" | cut -d : -f 1 | head -1)
+tail -n +$(expr $lastline) Manulex.csv | grep -v "^EOS" > FORMES_ORTHO.csv
 
 CP=7; CE1=11; CE2CM2=15
 SIZE=300
 
 
 # nextCE1 = topCE1 - topCP
-cat LEMMES.csv | sort -t "," -k $CP -n -r | head -n $SIZE > topCP
-cat LEMMES.csv | sort -t "," -k $CE1 -n -r | head -n $(expr $SIZE \* 2) > topCE1
+cat FORMES_ORTHO.csv | sort -t "," -k $CP -n -r | head -n $SIZE > topCP
+cat FORMES_ORTHO.csv | sort -t "," -k $CE1 -n -r | head -n $(expr $SIZE \* 2) > topCE1
 cat topCP topCE1 | sort | uniq -d > dup
 cat topCE1 dup | sort | uniq -u | tail -n $SIZE > nextCE1
 
 # nextCE2CM2 = topCE2CM2 - topCE1 - topCP
-cat LEMMES.csv | sort -t "," -k $CE2CM2 -n -r | head -n $(expr $SIZE \* 4) > topCE2CM2
+cat FORMES_ORTHO.csv | sort -t "," -k $CE2CM2 -n -r | head -n $(expr $SIZE \* 4) > topCE2CM2
 cat topCP nextCE1 topCE2CM2 | sort | uniq -d > dup
 cat topCE2CM2 dup | sort | uniq -u | tail -n $(expr $SIZE \* 2) > nextCE2CM2
 
