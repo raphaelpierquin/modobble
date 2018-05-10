@@ -77,7 +77,17 @@ var modobble = (function() {
 
   Player.prototype.draw = function() {
     var ponderate = function(word) { return [word,50]; };
-    var opts = { list: this.card.map(ponderate), click: clickByPlayer(this), shuffle: true, rotateRatio: 1 };
+    var opts = {
+      list: this.card.map(ponderate),
+      click: clickByPlayer(this),
+      shuffle: true,
+      gridSize: 32,
+      minRotation: - Math.PI / 12 * 11,
+      maxRotation: Math.PI / 12 * 11,
+      rotationSteps: 12,
+      rotateRatio: 1,
+      shape: "square"
+    };
     WordCloud(this.display, opts);
     return this;
   }
