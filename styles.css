@@ -50,3 +50,8 @@ html, body {
   background-color: #FF0000;
   flex-grow: 1;
 }
+
+.score {
+  font-size: 40px;
+  margin: 10px;
+}
