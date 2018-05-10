@@ -1,7 +1,7 @@
 var modobble = (function() {
   var players = []
   var words = [ "maison", "chaussure", "bateau", "assiette", "lapin", "chaussette", "cheval", "miaou", "petit", "manger", "rouge", "nuage", "éléphant", "téléphone" ];
-  var wordsPerCard = 5;
+  var wordsPerCard = 8;
   var scores = [0,0];
   var drawScores;
 
