@@ -66,6 +66,7 @@ var modobble = (function() {
   function draw() {
     players[0].draw();
     players[1].draw();
+    drawScores(players[0].score,players[1].score);
   }
 
 
