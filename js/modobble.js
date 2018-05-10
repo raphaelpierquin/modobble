@@ -21,8 +21,9 @@ var modobble = (function() {
 
   function loadWords(list) {
     words = list;
-    card1 = nextCard([]);
-    card2 = nextCard(card1);
+    players[0].card = nextCard([]);
+    players[1].card = nextCard(players[0].card);
+    draw();
   }
 
   function theOther(player) {
@@ -56,7 +57,6 @@ var modobble = (function() {
   function draw() {
     players[0].draw();
     players[1].draw();
-    return players;
   }
 
 

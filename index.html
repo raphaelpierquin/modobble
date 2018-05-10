@@ -16,11 +16,6 @@
 </head>
 
 <body>
-  <div id="configpanel">
-    <label id="load-words">
-      <textarea id="words-area" placeholder="liste de mots séparé par des virgules" cols="80" rows="10"></textarea>
-      Charger les mots</label>
-  </div>
   <div id="tout">
     <div id="gauche"><canvas id="toto"></canvas></div>
     <div id="droite">droite</div>
@@ -30,6 +25,15 @@
   <script src="js/manulex.js"></script>
   <script src="js/modobble.js"></script>
   <script src="js/main.js"></script>
+  <div id="configpanel">
+    <label id="level" class="hidden" > Niveau
+      <select name="level">
+        <option value="cp">CP</option>
+        <option value="ce1">CE1</option>
+        <option value="ce2cm2">CE2-CM2</option>
+      </select>
+    </label>
+  </div>
   <div id="menu">config</div>
   <div id="score1"></div>
   <div id="score2"></div>

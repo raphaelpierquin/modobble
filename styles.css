@@ -3,8 +3,14 @@ html, body {
   height: 100%
 }
 
-#configpanel label {
+.hidden {
   display: none;
+}
+
+#configpanel {
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
 #menu {
