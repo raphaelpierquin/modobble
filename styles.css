@@ -8,28 +8,32 @@ html, body {
 }
 
 #configpanel {
+  left: 0px;
+}
+
+#configpanel, #menu {
   position: absolute;
   top: 0px;
-  left: 0px;
   margin: 10px;
   font-size: 20px;
 }
 
 #menu {
-  position: absolute;
-  top: 0px;
   right: 0px;
 }
 
-#score1 {
+.score {
   position: absolute;
   bottom: 0px;
+  font-size: 40px;
+  margin: 10px;
+}
+
+#score1 {
   left: 0px;
 }
 
 #score2 {
-  position: absolute;
-  bottom: 0px;
   right: 0px;
 }
 
@@ -51,7 +55,3 @@ html, body {
   flex-grow: 1;
 }
 
-.score {
-  font-size: 40px;
-  margin: 10px;
-}
