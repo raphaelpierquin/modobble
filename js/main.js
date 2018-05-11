@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelector('select[name="deck"]').onchange=deckChangeEventHandler;
   document.getElementById('menu').onclick=toggleConfigPanel;
   window.addEventListener("orientationchange", function() {
-    modobble.draw();
+    window.setTimeout(function(){ modobble.draw(); }, 1000);
   });
 });
 
