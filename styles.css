@@ -3,10 +3,6 @@ html, body {
   height: 100%
 }
 
-.hidden {
-  display: none;
-}
-
 #configpanel {
   left: 0px;
 }
@@ -37,9 +33,18 @@ html, body {
   right: 0px;
 }
 
+
 #tout {
   display: flex;
-  height: 100%
+  height: 100%;
+}
+
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
 }
 
 #tout div {
@@ -55,3 +60,6 @@ html, body {
   flex-grow: 1;
 }
 
+.hidden {
+  display: none;
+}

@@ -19,7 +19,7 @@
   <meta name="apple-mobile-web-app-title" content="Modobble">
   <meta name="application-name" content="Modobble">
   <meta name="msapplication-TileColor" content="#ffc40d">
-  <meta name="theme-color" content="#ffffff">`
+  <meta name="theme-color" content="#ffffff">
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -27,16 +27,18 @@
 </head>
 
 <body>
-  <div id="tout">
-    <div id="gauche"></div>
-    <div id="droite"></div>
-  </div>
   <script src="https://underscorejs.org/underscore.js"></script>
   <script src="js/wordcloud2.js"></script>
   <script src="js/manulex.js"></script>
   <script src="js/wordsdeck.js"></script>
   <script src="js/modobble.js"></script>
   <script src="js/main.js"></script>
+  <div id="tout">
+    <div id="gauche"></div>
+    <div id="droite"></div>
+  </div>
+  <div id="overlay" class="hidden">
+  </div>
   <div id="configpanel" class="hidden">
     <label id="level"> Niveau
       <select name="level">

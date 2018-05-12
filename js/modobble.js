@@ -3,20 +3,26 @@ var modobble = (function() {
   var words;
   var wordsPerCard = 8;
   var scores = [0,0];
-  var drawScores;
+  var drawScores, gameOver;
 
-  function init(w, d1, d2, f) {
+  function init(w, d1, d2, sf,gf) {
     words = w;
     var card = nextCard([]);
     players[0] = new Player(d1,card);
     players[1] = new Player(d2,nextCard(card));
-    drawScores = f;
+    drawScores = sf;
+    gameOver = gf;
   }
 
   function nextTurn(previousWinner,theOtherPlayer) {
     previousWinner.card = nextCard(theOtherPlayer.card);
     previousWinner.draw();
-    drawScores(players[0].score,players[1].score);
+  }
+
+  function restart() {
+    players[0].score = 0;
+    players[1].score = 0;
+    reset();
   }
 
   function reset() {
@@ -59,7 +65,13 @@ var modobble = (function() {
     var otherPlayer = theOther(player);
     if (_.contains(player.card, word) && _.contains(otherPlayer.card, word)) {
       player.incrementScore();
-      nextTurn(player,otherPlayer);
+      drawScores(players[0].score,players[1].score);
+      if (player.score >= 20) {
+        player.wins();
+        otherPlayer.looses();
+        gameOver();
+      } else
+        nextTurn(player,otherPlayer);
     }
   }
 
@@ -93,6 +105,30 @@ var modobble = (function() {
     return this;
   }
 
+  Player.prototype.looses = function() {
+    while (this.display.firstChild) { this.display.removeChild(this.display.firstChild);}
+    this.display.style["z-index"] = 0;
+    //this.display.hidden = true; 
+  }
+
+  Player.prototype.wins = function() {
+    var opts = {
+      list: _.times(30,function(){return ["bravo !",_.sample([10,30, 50, 100])]}),
+      click: clickByPlayer(this),
+      minRotation: - Math.PI / 12 * 11,
+      maxRotation: Math.PI / 12 * 11,
+      rotationSteps: 12,
+      rotateRatio: 1,
+      shape: "square",
+      color: "green",
+      backgroundColor: "yellow",
+      drawOutOfBound: true
+    };
+    this.display.style["z-index"] = -1;
+    WordCloud(this.display, opts);
+    return this;
+  }
+
   Player.prototype.incrementScore = function() { this.score++; };
 
   return {
@@ -101,7 +137,8 @@ var modobble = (function() {
     loadWords : loadWords,
     words : words,
     players : players,
-    setNumberOfWordsPerCard: setNumberOfWordsPerCard
+    setNumberOfWordsPerCard: setNumberOfWordsPerCard,
+    restart: restart
   }
 
 }());

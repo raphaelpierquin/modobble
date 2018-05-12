@@ -41,9 +41,13 @@ function updateDeckSelectOptions() {
   });
 }
 
+function gameOver() {
+  document.getElementById('overlay').classList.toggle('hidden');
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   wordsDeck.init('cp',1,25)
-  modobble.init(wordsDeck.getWords(),document.getElementById("gauche"),document.getElementById("droite"),drawScores);
+  modobble.init(wordsDeck.getWords(),document.getElementById("gauche"),document.getElementById("droite"),drawScores,gameOver);
   wordsDeck.onChange(function(words){ modobble.loadWords(words)});
   modobble.draw();
   updateDeckSelectOptions();
@@ -55,5 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
   window.addEventListener("orientationchange", function() {
     window.setTimeout(function(){ modobble.draw(); }, 1000);
   });
+  document.getElementById('overlay').onclick = function(e){
+    modobble.restart();
+    e.target.classList.toggle('hidden'); 
+  };
 });
 
