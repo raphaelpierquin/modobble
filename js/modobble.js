@@ -22,10 +22,6 @@ var modobble = (function() {
   function restart() {
     players[0].score = 0;
     players[1].score = 0;
-    reset();
-  }
-
-  function reset() {
     players[0].card = nextCard([]);
     players[1].card = nextCard(players[0].card);
     draw();
@@ -33,12 +29,12 @@ var modobble = (function() {
 
   function loadWords(list) {
     words = list;
-    reset();
+    restart();
   }
 
   function setNumberOfWordsPerCard(n) {
     wordsPerCard = n;
-    reset();
+    restart();
   }
 
   function theOther(player) {
