@@ -53,7 +53,7 @@ var modobble = (function() {
 
   function clickByPlayer(player) {
     return function(elems) {
-      click(player,elems[0])
+      if (! player.disabled) click(player,elems[0])
     }
   }
 
@@ -62,12 +62,15 @@ var modobble = (function() {
     if (_.contains(player.card, word) && _.contains(otherPlayer.card, word)) {
       player.incrementScore();
       drawScores(players[0].score,players[1].score);
-      if (player.score >= 20) {
-        player.wins();
-        otherPlayer.looses();
-        gameOver();
-      } else
-        nextTurn(player,otherPlayer);
+      otherPlayer.disableForAWhile();
+      player.disableForAWhile("rgb(220,255,220)", function() {
+        if (player.score >= 20) {
+          player.wins();
+          otherPlayer.looses();
+          gameOver();
+        } else
+          nextTurn(player,otherPlayer);
+      });
     }
   }
 
@@ -104,7 +107,7 @@ var modobble = (function() {
   Player.prototype.looses = function() {
     while (this.display.firstChild) { this.display.removeChild(this.display.firstChild);}
     this.display.style["z-index"] = 0;
-    //this.display.hidden = true; 
+    this.disabled = false;
   }
 
   Player.prototype.wins = function() {
@@ -126,6 +129,16 @@ var modobble = (function() {
   }
 
   Player.prototype.incrementScore = function() { this.score++; };
+
+  Player.prototype.disableForAWhile = function(color,cb) {
+    this.disabled = true;
+    if (color) this.display.style["background-color"]=color;
+    var player = this;
+    window.setTimeout(function(){
+      player.disabled=false;
+      if (cb) cb();
+    }, 1000);
+  }
 
   return {
     init : init,
