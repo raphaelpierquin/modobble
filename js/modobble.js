@@ -2,7 +2,6 @@ var modobble = (function() {
   var players = []
   var words;
   var wordsPerCard = 8;
-  var scores = [0,0];
   var drawScores, gameOver;
 
   function init(w, d1, d2, sf,gf) {
