@@ -1,21 +1,36 @@
 html, body {
-  margin: 0px;
+  margin: 0;
   height: 100%
-}
-
-#configpanel {
-  left: 0px;
 }
 
 #configpanel, #menu {
   position: absolute;
-  top: 0px;
-  margin: 10px;
+  top: 0;
   font-size: 20px;
 }
 
 #menu {
-  right: 0px;
+  right: 0;
+  margin: 1em;
+}
+
+#configpanel {
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+#configoverlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.1);
+}
+
+#subpanel {
+  position: absolute;
+  top:0;
+  left:0;
+  margin: 1em;
 }
 
 .score {
@@ -26,11 +41,11 @@ html, body {
 }
 
 #score1 {
-  left: 0px;
+  left: 0;
 }
 
 #score2 {
-  right: 0px;
+  right: 0;
 }
 
 

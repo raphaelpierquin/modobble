@@ -63,5 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
     modobble.restart();
     e.target.classList.toggle('hidden'); 
   };
+  document.getElementById('configoverlay').onclick = toggleConfigPanel;
 });
 
