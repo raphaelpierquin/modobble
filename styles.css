@@ -3,19 +3,18 @@ html, body {
   height: 100%
 }
 
-#configpanel, #menu {
+#menu {
   position: absolute;
   top: 0;
-  font-size: 20px;
-}
-
-#menu {
   right: 0;
   margin: 1em;
+  font-size: large;
 }
 
 #configpanel {
-  left: 0px;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
 }
@@ -31,6 +30,11 @@ html, body {
   top:0;
   left:0;
   margin: 1em;
+}
+
+label {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .score {
