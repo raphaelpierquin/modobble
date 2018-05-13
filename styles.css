@@ -5,7 +5,7 @@ html, body {
 
 #menu {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   margin: 1em;
   font-size: large;
@@ -27,7 +27,7 @@ html, body {
 
 #subpanel {
   position: absolute;
-  top:0;
+  bottom:0;
   left:0;
   margin: 1em;
 }
@@ -44,18 +44,50 @@ label {
   margin: 10px;
 }
 
-#score1 {
-  left: 0;
-}
-
-#score2 {
-  right: 0;
-}
 
 
 #tout {
   display: flex;
   height: 100%;
+}
+
+@media screen and (orientation: landscape) {
+  #tout {
+    flex-direction: row;
+  }
+  #player1 {
+    border-right: solid;
+    border-width: thin;
+  }
+  #score1 {
+    top:0;
+    right: 50%;
+  }
+
+  #score2 {
+    top:0;
+    left: 50%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  #tout {
+    flex-direction: column;
+  }
+  #player1 {
+    border-bottom: solid;
+    border-width: thin;
+  }
+  #score1 {
+    right: 0;
+    bottom: 50%;
+    transform: rotate(180deg);
+  }
+
+  #score2 {
+    right: 0;
+    top: 50%;
+  }
 }
 
 #overlay {
@@ -73,8 +105,10 @@ label {
 }
 
 #player1 {
-  width: 50%;
+  flex-grow: 1;
+  border-color: black;
 }
+
 #player2 {
   flex-grow: 1;
 }
