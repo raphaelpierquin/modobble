@@ -47,7 +47,7 @@ function gameOver() {
 
 document.addEventListener("DOMContentLoaded", function() {
   wordsDeck.init('cp',1,25)
-  modobble.init(wordsDeck.getWords(),document.getElementById("gauche"),document.getElementById("droite"),drawScores,gameOver);
+  modobble.init(wordsDeck.getWords(),document.getElementById("player1"),document.getElementById("player2"),drawScores,gameOver);
   wordsDeck.onChange(function(words){ modobble.loadWords(words)});
   modobble.draw();
   updateDeckSelectOptions();

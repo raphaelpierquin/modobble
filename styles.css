@@ -72,10 +72,10 @@ label {
   justify-content: center;
 }
 
-#gauche {
+#player1 {
   width: 50%;
 }
-#droite {
+#player2 {
   flex-grow: 1;
 }
 
