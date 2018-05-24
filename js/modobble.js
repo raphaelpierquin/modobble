@@ -2,10 +2,11 @@ var modobble = (function() {
   var players = []
   var words;
   var wordsPerCard = 8;
-  var drawScores, gameOver;
+  var drawScores, gameOver, maxScore;
 
-  function init(w, d1, d2, sf,gf) {
+  function init(w, m, d1, d2, sf, gf) {
     words = w;
+    maxScore = m;
     var card = nextCard([]);
     players[0] = new Player(d1,card);
     players[1] = new Player(d2,nextCard(card));
@@ -63,7 +64,7 @@ var modobble = (function() {
       drawScores(players[0].score,players[1].score);
       otherPlayer.disableForAWhile();
       player.disableForAWhile("rgb(220,255,220)", function() {
-        if (player.score >= 20) {
+        if (player.score >= maxScore) {
           player.wins();
           otherPlayer.looses();
           gameOver();
