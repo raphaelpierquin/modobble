@@ -32,6 +32,10 @@ var modobble = (function() {
     restart();
   }
 
+  function setMaxScore(n) {
+    maxScore = n;
+  }
+
   function setNumberOfWordsPerCard(n) {
     wordsPerCard = n;
     restart();
@@ -147,6 +151,7 @@ var modobble = (function() {
     words : words,
     players : players,
     setNumberOfWordsPerCard: setNumberOfWordsPerCard,
+    setMaxScore: setMaxScore,
     restart: restart
   }
 

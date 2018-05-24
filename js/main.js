@@ -11,6 +11,10 @@ function levelChangeEventHandler(event) {
   updateDeckSelectOptions();
 }
 
+function maxScoreChangeEventHandler (event) {
+  modobble.setMaxScore(parseInt(event.target.value));
+}
+
 function wordsPerCardChangeEventHandler(event) {
   modobble.setNumberOfWordsPerCard(event.target.value);
 }
@@ -53,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
   updateDeckSelectOptions();
   document.querySelector('select[name="level"]').onchange=levelChangeEventHandler;
   document.querySelector('select[name="wordspercard"]').onchange=wordsPerCardChangeEventHandler;
+  document.querySelector('select[name="maxscore"]').onchange=maxScoreChangeEventHandler;
   document.querySelector('select[name="decksize"]').onchange=deckSizeChangeEventHandler;
   document.querySelector('select[name="deck"]').onchange=deckChangeEventHandler;
   document.getElementById('menu').onclick=toggleConfigPanel;
