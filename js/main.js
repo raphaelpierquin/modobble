@@ -70,5 +70,6 @@ document.addEventListener("DOMContentLoaded", function() {
   };
   document.getElementById('configoverlay').onclick = toggleConfigPanel;
   document.getElementById('restart').onclick = modobble.restart;
+  document.getElementById('reset').onclick = function() { window.location.reload(true);}
 });
 
