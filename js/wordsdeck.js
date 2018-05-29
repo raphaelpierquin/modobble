@@ -12,22 +12,24 @@ var wordsDeck = (function() {
     ce2cm2: "CE2-CM2"
   }
 
-  var level, deckSize, index;
+  var level, deckSize, index, afresh;
 
   function init(l, i, s) {
     level = l;
     index = i;
     deckSize = s;
     notifyDeckChange = function(){};
+    afresh = false;
   }
 
   function setLevel(l) {
     level = l;
+    index = 1;
     notifyDeckChange(getWords());
   }
 
-  function setDeckSize(s) {
-    deckSize = s;
+  function setAfresh(a) {
+    afresh = a;
     notifyDeckChange(getWords());
   }
 
@@ -41,8 +43,8 @@ var wordsDeck = (function() {
   }
 
   function getWords() {
-    return wordsPerLevel[level].slice(index-1,index-1+deckSize);
-    return wordsPerLevel[level];
+    var firstIndex = afresh ? 0 : index-1;
+    return wordsPerLevel[level].slice(firstIndex, index-1+deckSize);
   }
 
   function getIndexes() {
@@ -57,8 +59,8 @@ var wordsDeck = (function() {
   return {
     init: init,
     setLevel: setLevel,
-    setDeckSize: setDeckSize,
     setIndex: setIndex,
+    setAfresh: setAfresh,
     onChange: onChange,
     getWords: getWords,
     getIndexes: getIndexes,

@@ -19,9 +19,8 @@ function wordsPerCardChangeEventHandler(event) {
   modobble.setNumberOfWordsPerCard(event.target.value);
 }
 
-function deckSizeChangeEventHandler(event) {
-  wordsDeck.setDeckSize(parseInt(event.target.value));
-  updateDeckSelectOptions();
+function afreshChangeEventHandler(event) {
+  wordsDeck.setAfresh(event.target.checked);
 }
 
 function deckChangeEventHandler(event) {
@@ -50,15 +49,15 @@ function gameOver() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  wordsDeck.init('cp',1,25)
+  wordsDeck.init('cp',1,20)
   modobble.init(wordsDeck.getWords(),10,document.getElementById("player1"),document.getElementById("player2"),drawScores,gameOver);
-  wordsDeck.onChange(function(words){ modobble.loadWords(words)});
+  wordsDeck.onChange(function(words){ modobble.loadWords(words); });
   modobble.draw();
   updateDeckSelectOptions();
   document.querySelector('select[name="level"]').onchange=levelChangeEventHandler;
   document.querySelector('select[name="wordspercard"]').onchange=wordsPerCardChangeEventHandler;
   document.querySelector('select[name="maxscore"]').onchange=maxScoreChangeEventHandler;
-  document.querySelector('select[name="decksize"]').onchange=deckSizeChangeEventHandler;
+  document.querySelector('input[id="afresh"]').onchange=afreshChangeEventHandler;
   document.querySelector('select[name="deck"]').onchange=deckChangeEventHandler;
   document.getElementById('menu').onclick=toggleConfigPanel;
   window.addEventListener("orientationchange", function() {
