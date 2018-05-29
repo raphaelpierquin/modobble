@@ -27,9 +27,12 @@ html, body {
 
 #subpanel {
   position: absolute;
-  bottom:0;
-  left:0;
-  margin: 1em;
+  right: 1em;
+  bottom: 4em;
+  margin: 3em, auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
 }
 
 label {
