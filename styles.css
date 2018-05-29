@@ -40,7 +40,6 @@ label {
 
 .score {
   position: absolute;
-  bottom: 0px;
   font-size: 40px;
   margin: 10px;
 }
@@ -62,12 +61,12 @@ label {
   }
   #score1 {
     top:0;
-    right: 50%;
+    left: 0;
   }
 
   #score2 {
     top:0;
-    left: 50%;
+    right: 0;
   }
 }
 
@@ -81,13 +80,13 @@ label {
   }
   #score1 {
     right: 0;
-    bottom: 50%;
+    top: 0;
     transform: rotate(180deg);
   }
 
   #score2 {
-    right: 0;
-    top: 50%;
+    left: 0;
+    bottom: 0;
   }
 }
 
